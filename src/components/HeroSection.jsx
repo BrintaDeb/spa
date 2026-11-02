@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Sparkles, Clock, MapPin, ShieldCheck, Droplets, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import soundscape from '../utils/soundscape';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 
 const SPA_VIDEOS = [
   {
@@ -65,8 +66,12 @@ export default function HeroSection({ onOpenBooking, onExploreAtmosphere }) {
     setIsAudioActive(active);
   };
 
+  const { isTwilight } = useTheme();
+
   return (
-    <section className="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
+    <section className={`relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 px-4 sm:px-6 lg:px-8 transition-colors duration-400 ${
+      isTwilight ? 'bg-[#041544] text-[#F8FAFE]' : 'bg-[#FFFFFF] text-[#09318D]'
+    }`}>
       {/* Decorative Blur Spheres */}
       <div 
         className="absolute top-0 right-0 w-[520px] h-[520px] bg-[#FD91CC]/20 rounded-full blur-3xl pointer-events-none -mr-40 -mt-20"
@@ -87,33 +92,45 @@ export default function HeroSection({ onOpenBooking, onExploreAtmosphere }) {
             <span className="font-script text-5xl sm:text-6xl lg:text-7xl text-[#FD91CC] leading-tight block select-none font-bold drop-shadow-xs">
               {t('heroScript')}
             </span>
-            <p className="text-[#38528E] text-sm sm:text-base font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 mt-2">
+            <p className={`text-sm sm:text-base font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 mt-2 ${
+              isTwilight ? 'text-white/80' : 'text-[#38528E]'
+            }`}>
               {t('heroDesc')}
             </p>
           </div>
 
           {/* Signature Special Feature Card (₹999 Spotlight) */}
-          <div className="bg-white p-5 sm:p-6 rounded-2xl border-l-4 border-[#FD91CC] border-y border-r border-[#09318D]/15 shadow-md max-w-xl mx-auto lg:mx-0 space-y-3 text-left">
+          <div className={`p-5 sm:p-6 rounded-2xl border-l-4 border-[#FD91CC] border-y border-r shadow-xl max-w-xl mx-auto lg:mx-0 space-y-3 text-left transition-all ${
+            isTwilight
+              ? 'bg-[#071c56]/85 border-[#FD91CC]/30 text-white backdrop-blur-md'
+              : 'bg-white border-[#09318D]/15'
+          }`}>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#09318D] block">
+              <span className={`text-[10px] font-black uppercase tracking-[0.2em] block ${
+                isTwilight ? 'text-[#FD91CC]' : 'text-[#09318D]'
+              }`}>
                 {t('specialOfferBadge')}
               </span>
-              <span className="text-[10px] font-mono font-bold text-[#09318D] bg-[#FD91CC]/30 px-2.5 py-1 rounded-full border border-[#FD91CC]">
+              <span className="text-[10px] font-mono font-bold text-[#FD91CC] bg-[#FD91CC]/20 px-2.5 py-1 rounded-full border border-[#FD91CC]/50">
                 LIMITED SLOTS
               </span>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <span className="font-heading text-xl sm:text-2xl lg:text-3xl font-black text-[#09318D]">
+              <span className={`font-heading text-xl sm:text-2xl lg:text-3xl font-black ${
+                isTwilight ? 'text-white' : 'text-[#09318D]'
+              }`}>
                 {t('specialOfferHeadline')}
               </span>
             </div>
 
-            <p className="text-xs text-[#38528E] leading-relaxed">
+            <p className={`text-xs leading-relaxed ${
+              isTwilight ? 'text-white/80' : 'text-[#38528E]'
+            }`}>
               {t('specialOfferDesc')}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2 text-[11px] text-[#38528E] font-semibold border-t border-[#09318D]/15">
+            <div className="flex flex-wrap items-center gap-4 pt-2 text-[11px] font-semibold border-t border-white/10 dark:border-white/10 text-stone-400">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-[#FD91CC]" /> 60 Minutes Duration
               </span>
@@ -121,7 +138,7 @@ export default function HeroSection({ onOpenBooking, onExploreAtmosphere }) {
                 <MapPin className="w-3.5 h-3.5 text-[#FD91CC]" /> Banamalipur, Agartala
               </span>
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#09318D]" /> 100% Certified Hygiene
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FD91CC]" /> 100% Certified Hygiene
               </span>
             </div>
           </div>

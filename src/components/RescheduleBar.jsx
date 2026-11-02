@@ -1,12 +1,18 @@
 import React from 'react';
 import { CalendarClock, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function RescheduleBar() {
   const { t } = useLanguage();
+  const { isTwilight } = useTheme();
 
   return (
-    <div className="bg-[#FFFFFF] border-b border-[#09318D]/15 py-2 sm:py-2.5 px-4 sm:px-6 lg:px-8">
+    <div className={`border-b py-2 sm:py-2.5 px-4 sm:px-6 lg:px-8 transition-colors duration-400 ${
+      isTwilight
+        ? 'bg-[#051c5b] border-[#FD91CC]/20 text-[#F8FAFE]'
+        : 'bg-[#FFFFFF] border-[#09318D]/15 text-[#09318D]'
+    }`}>
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-center sm:text-left">
         
         {/* Left: Signature Handwritten Script Accent */}
@@ -18,7 +24,9 @@ export default function RescheduleBar() {
         </div>
 
         {/* Right: Streamlined Client Advisory */}
-        <div className="text-[11.5px] sm:text-xs text-[#38528E] leading-relaxed flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-1">
+        <div className={`text-[11.5px] sm:text-xs leading-relaxed flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-1 ${
+          isTwilight ? 'text-white/80' : 'text-[#38528E]'
+        }`}>
           <span>{t('rescheduleAdvisory')}</span>
         </div>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import WaterRippleCanvas from './components/WaterRippleCanvas';
 import Navbar from './components/Navbar';
 import RescheduleBar from './components/RescheduleBar';
@@ -36,8 +37,10 @@ function SpaAppContent() {
     setBookingOpen(false);
   };
 
+  const { isTwilight } = useTheme();
+
   return (
-    <div className="relative min-h-screen bg-[#FFFFFF] text-[#09318D] selection:bg-[#FD91CC]/30 selection:text-[#09318D]">
+    <div className={`relative min-h-screen transition-colors duration-500 ${isTwilight ? 'bg-[#041544] text-[#F8FAFE]' : 'bg-[#FFFFFF] text-[#09318D]'} selection:bg-[#FD91CC]/30 selection:text-[#09318D]`}>
       
       {/* 1. Global 60fps Interactive Water Ripple Canvas */}
       <WaterRippleCanvas />
@@ -176,8 +179,10 @@ function SpaAppContent() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <SpaAppContent />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <SpaAppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Sparkles, Brain, Droplets, Clock, Wind, Sun, Snowflake, CloudRain, CheckCircle2, ArrowRight, RotateCcw } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 
 const QUESTIONS = [
   {
     id: 'concern',
-    stepNumber: '01',
+    stepNumber: 'I',
     title: 'What is your primary physical goal today?',
     subtitle: 'Select the focus area your body is calling for:',
     options: [
@@ -41,7 +42,7 @@ const QUESTIONS = [
   },
   {
     id: 'sensitivity',
-    stepNumber: '02',
+    stepNumber: 'II',
     title: 'Desired Pressure & Touch Sensitivity',
     subtitle: 'How firm would you like your therapist to work?',
     options: [
@@ -67,7 +68,7 @@ const QUESTIONS = [
   },
   {
     id: 'duration',
-    stepNumber: '03',
+    stepNumber: 'III',
     title: 'Ideal Session Duration',
     subtitle: 'How much time can you dedicate to your wellbeing?',
     options: [
@@ -97,7 +98,7 @@ const QUESTIONS = [
   },
   {
     id: 'climate',
-    stepNumber: '04',
+    stepNumber: 'IV',
     title: 'Agartala Seasonal Climate Factor',
     subtitle: 'Contextual botanical recommendation for Tripura’s weather:',
     options: [
@@ -128,6 +129,7 @@ const QUESTIONS = [
 
 export default function SmartDiagnosticQuiz({ onOpenBooking }) {
   const { t } = useLanguage();
+  const { isTwilight } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({
     concern: 'calm',
@@ -164,7 +166,11 @@ export default function SmartDiagnosticQuiz({ onOpenBooking }) {
   const duration = durationObj?.duration || '60 MIN';
 
   return (
-    <section id="diagnostic-quiz" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF] border-b border-[#09318D]/15 relative overflow-hidden">
+    <section id="diagnostic-quiz" className={`py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b transition-colors duration-400 relative overflow-hidden ${
+      isTwilight
+        ? 'bg-[#041544] border-[#FD91CC]/20 text-[#F8FAFE]'
+        : 'bg-[#FFFFFF] border-[#09318D]/15 text-[#09318D]'
+    }`}>
       
       {/* Background ambient radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#FD91CC]/15 rounded-full blur-3xl pointer-events-none" />
@@ -173,32 +179,38 @@ export default function SmartDiagnosticQuiz({ onOpenBooking }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#09318D]/20 text-[#09318D] text-[11px] font-black uppercase tracking-[0.2em] shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-[#09318D]/20 text-[#09318D] text-[11px] font-black uppercase tracking-[0.2em] shadow-sm">
             <Brain className="w-3.5 h-3.5 text-[#FD91CC]" />
             <span>30-Second Sensory Consultation</span>
           </div>
-          <h2 className="font-heading text-3xl sm:text-5xl font-black text-[#09318D] tracking-tight leading-tight">
+          <h2 className="font-heading text-3xl sm:text-5xl font-black tracking-tight leading-tight">
             Smart Skin & Body <span className="font-serif italic text-[#FD91CC] font-bold">Diagnostic Quiz</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#38528E] font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className={`text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto ${
+            isTwilight ? 'text-white/80' : 'text-[#38528E]'
+          }`}>
             {t('quizSubtitle')}
           </p>
         </div>
 
         {/* Wizard Main Card */}
-        <div className="bg-white rounded-3xl border-2 border-[#09318D]/15 shadow-xl p-6 sm:p-10 transition-all">
+        <div className={`rounded-3xl border-2 shadow-2xl p-6 sm:p-10 transition-all ${
+          isTwilight
+            ? 'bg-[#071c56]/85 border-[#FD91CC]/30 text-white backdrop-blur-md'
+            : 'bg-white border-[#09318D]/15'
+        }`}>
           
           {!isCompleted ? (
             <div className="space-y-8">
               
               {/* Progress Steps Header */}
-              <div className="flex items-center justify-between pb-6 border-b border-[#09318D]/10">
-                <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-full bg-[#09318D] text-white text-xs font-bold flex items-center justify-center font-mono">
+              <div className="flex items-center justify-between pb-6 border-b border-white/10 dark:border-white/10">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-full bg-[#09318D] text-[#FD91CC] border border-[#FD91CC]/50 text-xs font-bold flex items-center justify-center font-roman shadow-sm">
                     {QUESTIONS[currentStep].stepNumber}
                   </span>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#09318D]">
-                    Step {currentStep + 1} of {QUESTIONS.length}
+                  <span className="text-xs font-black uppercase tracking-widest">
+                    Phase {QUESTIONS[currentStep].stepNumber} of IV
                   </span>
                 </div>
 
