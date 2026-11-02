@@ -105,12 +105,12 @@ export default function Navbar({ onOpenBooking }) {
         </nav>
 
         {/* Desktop Header Actions */}
-        <div className="hidden lg:flex items-center gap-2 shrink-0">
+        <div className="hidden lg:flex items-center gap-1.5 shrink-0">
           
           {/* Twilight Candlelight Mode Switcher */}
           <button
             onClick={toggleTheme}
-            className={`h-[38px] px-3 rounded-full border transition-all flex items-center gap-1.5 cursor-pointer text-xs font-bold shrink-0 ${
+            className={`h-[38px] px-2.5 rounded-full border transition-all flex items-center gap-1.5 cursor-pointer text-xs font-bold shrink-0 ${
               isTwilight
                 ? 'bg-[#E6B87D] text-[#041544] border-[#E6B87D] shadow-[0_0_15px_rgba(230,184,125,0.4)]'
                 : 'bg-white text-[#09318D] border-[#09318D]/20 hover:border-[#FD91CC]'
@@ -134,7 +134,7 @@ export default function Navbar({ onOpenBooking }) {
           {/* Language Switcher Pill (EN ↔ বাংলা) */}
           <button
             onClick={toggleLanguage}
-            className={`h-[38px] px-3 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
+            className={`h-[38px] px-2.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shrink-0 ${
               isTwilight
                 ? 'bg-[#061c56] border-[#FD91CC]/30 text-white hover:border-[#FD91CC]'
                 : 'bg-white border-[#09318D]/20 hover:border-[#FD91CC] text-[#09318D]'
@@ -143,13 +143,13 @@ export default function Navbar({ onOpenBooking }) {
             aria-label="Toggle language between English and Bengali"
           >
             <Languages className="w-3.5 h-3.5 text-[#FD91CC]" />
-            <span>{lang === 'en' ? 'বাংলা' : 'English'}</span>
+            <span>{lang === 'en' ? 'বাংলা' : 'EN'}</span>
           </button>
 
           {/* Soothing Rain & Water Droplets Audio Button */}
           <button
             onClick={toggleSound}
-            className={`h-[38px] px-3 rounded-full border transition-all flex items-center gap-2 cursor-pointer text-xs font-bold uppercase tracking-wider shrink-0 ${
+            className={`h-[38px] px-2.5 rounded-full border transition-all flex items-center gap-1.5 cursor-pointer text-xs font-bold uppercase tracking-wider shrink-0 ${
               isPlayingAudio
                 ? 'bg-[#FD91CC] text-[#09318D] border-[#FD91CC] shadow-xs'
                 : isTwilight
@@ -194,7 +194,7 @@ export default function Navbar({ onOpenBooking }) {
           {/* Book Online Pill CTA */}
           <button
             onClick={() => onOpenBooking()}
-            className="h-[38px] px-5 rounded-full btn-peach text-[11px] font-extrabold uppercase tracking-widest shadow-xs flex items-center justify-center cursor-pointer shrink-0 whitespace-nowrap"
+            className="h-[38px] px-4 rounded-full btn-peach text-[11px] font-extrabold uppercase tracking-widest shadow-xs flex items-center justify-center cursor-pointer shrink-0 whitespace-nowrap"
           >
             {t('btn_book_now')} →
           </button>
