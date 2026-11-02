@@ -46,6 +46,7 @@ export default function Navbar({ onOpenBooking }) {
     { label: t('nav_slots'), href: '#availability', badge: 'Live Slots' },
     { label: t('nav_memberships'), href: '#membership', badge: 'VIP Pass' },
     { label: 'Gift Vouchers', href: '#gift-cards', badge: 'Custom Card' },
+    { label: 'VIP Passport', href: '#loyalty-passport', badge: 'Loyalty Stamps' },
     { label: t('nav_services'), href: '#services' },
     { label: t('nav_atmosphere'), href: '#atmosphere' },
     { label: t('nav_couples'), href: '#couples' },

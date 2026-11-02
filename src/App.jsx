@@ -16,6 +16,8 @@ import SanctuaryTour from './components/SanctuaryTour';
 import TreatmentMenu from './components/TreatmentMenu';
 import CouplesSuite from './components/CouplesSuite';
 import MembershipSection from './components/MembershipSection';
+import SanctuaryPassport from './components/SanctuaryPassport';
+import FloatingConciergePill from './components/FloatingConciergePill';
 import GiftCardsSection from './components/GiftCardsSection';
 import FaqSection from './components/FaqSection';
 import LocationTravelEstimator from './components/LocationTravelEstimator';
@@ -124,6 +126,11 @@ function SpaAppContent() {
           <MembershipSection onOpenBooking={handleOpenBooking} />
         </div>
 
+        {/* 15b. Digital VIP "Sanctuary Passport" (Guest Loyalty Stamps) */}
+        <div id="loyalty-passport">
+          <SanctuaryPassport onOpenBooking={handleOpenBooking} />
+        </div>
+
         {/* 16. Infinite Running Kinetic Marquee Ribbon #2 (Call to Book Ticker) */}
         <MarqueeRibbon
           bg="bg-[#FD91CC]"
@@ -165,6 +172,9 @@ function SpaAppContent() {
 
       {/* 22. Mobile Bottom Dock (Android & iOS Safe Area Optimized) */}
       <MobileBottomBar onOpenBooking={handleOpenBooking} />
+
+      {/* 22b. Floating Live Concierge Pill with Real-Time Reception Status */}
+      <FloatingConciergePill />
 
       {/* 23. Slide-out Reservation Concierge Drawer */}
       <BookingDrawer

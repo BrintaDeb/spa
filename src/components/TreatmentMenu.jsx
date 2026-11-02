@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, Clock, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ArrowRight, Clock, CheckCircle2, Scale } from 'lucide-react';
+import TreatmentComparisonModal from './TreatmentComparisonModal';
 
 const CATEGORIES = [
   { id: 'massage', label: 'MASSAGE THERAPY' },
@@ -115,6 +116,7 @@ const MENU_ITEMS = {
 
 export default function TreatmentMenu({ onOpenBooking }) {
   const [activeTab, setActiveTab] = useState('massage');
+  const [comparisonOpen, setComparisonOpen] = useState(false);
 
   const currentItems = MENU_ITEMS[activeTab] || [];
 
@@ -154,6 +156,18 @@ export default function TreatmentMenu({ onOpenBooking }) {
               </button>
             );
           })}
+        </div>
+
+        {/* Massage Comparison Matrix Trigger */}
+        <div className="flex justify-center -mt-6">
+          <button
+            onClick={() => setComparisonOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-heading font-black tracking-wider uppercase bg-[#FD91CC]/15 hover:bg-[#FD91CC]/25 text-[#09318D] border border-[#FD91CC]/60 shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
+          >
+            <Scale className="w-4 h-4 text-[#FD91CC]" />
+            <span>Compare Therapies Side-by-Side (Pressure, Oils & Knots)</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#09318D]" />
+          </button>
         </div>
 
         {/* Treatment Cards Grid */}
@@ -264,6 +278,13 @@ export default function TreatmentMenu({ onOpenBooking }) {
         </div>
 
       </div>
+
+      {/* Comparison Modal */}
+      <TreatmentComparisonModal
+        isOpen={comparisonOpen}
+        onClose={() => setComparisonOpen(false)}
+        onOpenBooking={onOpenBooking}
+      />
     </section>
   );
 }
